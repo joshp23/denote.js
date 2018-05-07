@@ -30,5 +30,5 @@ var delta = {
 };
 var d = new denote(delta);
 var parsed = d.parse();
-parsed.toXML(); // => <underline><bold>Hello </bold></underline><italic>world!</italic>
+parsed.toNote();
 ```
