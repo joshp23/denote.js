@@ -1,34 +1,49 @@
 # denote.js
-Render Quilljs Deltas to Tomboy Note XML
+Render [Quill](https://github.com/quilljs/quill/) Deltas to [Tomboy](https://wiki.gnome.org/Apps/Tomboy) Note XML
 
 ## Use
-
 Include `denote.js` in your web page:
 ```html
 <script src="./js/denote.js"></script>
 ```
-Create a new instance of the `denote` class and give it an `object` or a `string` to parse as `delta`:
+Create a new instance of the `denote` class and give it an `object` or `string` to parse to Tomboy Note format as `delta`  
+```js
+var dd = new denote(delta);
+var parsed = dd.parse();
+var data = parsed.toNote();
+```
+Then do what you will with the `data`.  
+Note: the toolbar options for Quill in the example folder are the only options that denote.js will render.
 
 ## Example
 ```js
-var delta = {
-    ops: [
-        {
-            insert: "Hello ",
-            attributes: {
-                bold: true,
-                underline: true
-            }
-        },
-        {
-            insert: "world!",
-            attributes: {
-                italic: true
-            }
-        }
-    ]
+// Evoke Quill after including it in your html, etc.
+var Delta = Quill.import('delta');
+var quill = new Quill('#editor-container', {
+  modules: {
+	toolbar: [
+	  [{ size: [ 'small', false, 'large', 'huge' ]}],
+	  ['bold', 'italic', 'underline', 'strike'],
+	  [{ 'background':'yellow' }, 'code'],
+	  ['clean'],
+	  [{ 'list': 'bullet' }]
+      ]
+  },
+  placeholder: 'Compose an epic...',
+  theme: 'snow'
+});
+// Populate a hidden input area on form submit
+var form = document.querySelector('form');
+form.onsubmit = function() {
+	// denote.js
+	var delta = quill.getContents();
+	var dd = new denote(delta);
+	var parsed = dd.parse();
+	var data = parsed.toNote();
+	// Populate hidden form on submit
+	var note = document.querySelector('input[name=note]');
+	note.value = data;
 };
-var d = new denote(delta);
-var parsed = d.parse();
-parsed.toNote();
 ```
+### Gratitude
+This project was inspired by [Deltoid.js](https://github.com/na2axl/Deltoid.js)
