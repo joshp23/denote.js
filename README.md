@@ -47,3 +47,8 @@ form.onsubmit = function() {
 ```
 ### Gratitude
 This project was inspired by [Deltoid.js](https://github.com/na2axl/Deltoid.js)
+
+### Support Dev
+All of my published code is developed and maintained in spare time, if you would like to support development of this, or any of my published code, I have set up a Liberpay account for just this purpose. Thank you.
+
+<noscript><a href="https://liberapay.com/joshu42/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
